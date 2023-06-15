@@ -1,4 +1,7 @@
 import turtle
+import pandas
+
+states_csv = "50_states.csv"
 
 screen = turtle.Screen()
 screen.title("U.S. States Game")
@@ -11,11 +14,20 @@ screen.addshape(image)
 image_ob = turtle.Turtle()
 image_ob.shape(image)
 
+data = pandas.read_csv(states_csv)
+states = data.state.tolist()
+# print(states)
 
+score = 0
+score_tally = f"{score}/50 States Correct"
 
 while True:
-    answer_state = screen.textinput(title="Guess the State", prompt="What's another state's name?")
+    answer_state = screen.textinput(title=score_tally, prompt="What's another state's name?")
     user_guess = answer_state.title()
+    print(user_guess)
+
+    if user_guess in states:
+        print("correct")
 
 
 screen.exitonclick()
