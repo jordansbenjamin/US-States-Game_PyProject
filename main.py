@@ -44,10 +44,9 @@ while True:
         write_state(user_guess, coordinates)
         user_guesses.append(user_guess)
         # print("correct")
+    # print(user_guesses)
 
-print(user_guesses)
-
-# screen.exitonclick()
+screen.exitonclick()
 
 # To get coordinates using mouse click
 # def get_mouse_click_coor(x, y):
