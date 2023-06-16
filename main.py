@@ -32,21 +32,29 @@ def write_state(user_guess, coordinates):
 score = 0
 user_guesses = []
 
-while True:
+while len(user_guesses) < 50:
     score_tally = f"{score}/50 States Correct"
-    answer_state = screen.textinput(title=score_tally, prompt="What's another state's name?")
+    answer_state = screen.textinput(title=score_tally, prompt="What's another state's name?").title()
     user_guess = answer_state.title()
-    # print(type(user_guess))
     coordinates = data.loc[data.state == user_guess, ['x', 'y']].values.flatten().tolist()
 
-    if user_guess in states:
+    if answer_state == "Exit":
+        break
+    elif user_guess in states:
         score += 1
         write_state(user_guess, coordinates)
         user_guesses.append(user_guess)
-        # print("correct")
-    # print(user_guesses)
+        
+# states_to_learn.csv
+missed_states = []
+for state in states:
+    if state not in user_guesses:
+        missed_states.append(state)
 
-screen.exitonclick()
+states_to_learn = pandas.DataFrame({'Missed States': missed_states})
+states_to_learn.to_csv('states_to_learn.csv', index=False)
+
+# screen.exitonclick()
 
 # To get coordinates using mouse click
 # def get_mouse_click_coor(x, y):
