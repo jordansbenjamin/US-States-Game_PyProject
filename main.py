@@ -33,12 +33,12 @@ score = 0
 user_guesses = []
 
 while len(user_guesses) < 50:
-    score_tally = f"{score}/50 States Correct"
-    answer_state = screen.textinput(title=score_tally, prompt="What's another state's name?").title()
+    answer_state = screen.textinput(title=f"{score}/50 States Correct", prompt="What's another state's name?").title()
     user_guess = answer_state.title()
     coordinates = data.loc[data.state == user_guess, ['x', 'y']].values.flatten().tolist()
 
     if answer_state == "Exit":
+        missing_states = [state for state in states if state not in user_guesses]
         break
     elif user_guess in states:
         score += 1
@@ -46,12 +46,12 @@ while len(user_guesses) < 50:
         user_guesses.append(user_guess)
         
 # states_to_learn.csv
-missed_states = []
-for state in states:
-    if state not in user_guesses:
-        missed_states.append(state)
+# missed_states = []
+# for state in states:
+#     if state not in user_guesses:
+#         missed_states.append(state)
 
-states_to_learn = pandas.DataFrame({'Missed States': missed_states})
+states_to_learn = pandas.DataFrame({'Missed States': missing_states})
 states_to_learn.to_csv('states_to_learn.csv', index=False)
 
 # screen.exitonclick()
