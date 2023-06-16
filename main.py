@@ -30,9 +30,9 @@ def write_state(user_guess, coordinates):
     writing_ob.write(user_guess, align='center', font=FONT)
 
 score = 0
-score_tally = f"{score}/50 States Correct"
 
 while True:
+    score_tally = f"{score}/50 States Correct"
     answer_state = screen.textinput(title=score_tally, prompt="What's another state's name?")
     user_guess = answer_state.title()
     # print(type(user_guess))
