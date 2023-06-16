@@ -30,6 +30,7 @@ def write_state(user_guess, coordinates):
     writing_ob.write(user_guess, align='center', font=FONT)
 
 score = 0
+user_guesses = []
 
 while True:
     score_tally = f"{score}/50 States Correct"
@@ -41,11 +42,12 @@ while True:
     if user_guess in states:
         score += 1
         write_state(user_guess, coordinates)
+        user_guesses.append(user_guess)
         # print("correct")
-        
 
+print(user_guesses)
 
-screen.exitonclick()
+# screen.exitonclick()
 
 # To get coordinates using mouse click
 # def get_mouse_click_coor(x, y):
